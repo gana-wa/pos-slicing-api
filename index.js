@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const logger = require("morgan");
 
-const Router = require("./src/Routes/index");
+const indexRouter = require("./src/Routes/index");
 
 const app = express();
 
@@ -15,7 +15,7 @@ app.use(bodyParser.json()); //json
 app.use(bodyParser.urlencoded({ extended: false })) //x-www-form-urlencoded
 app.use(logger("dev"));
 
-app.use(Router);
+app.use(indexRouter);
 
 // app.get("/1", (_,res) => {
 //     // res.send("Hello world");

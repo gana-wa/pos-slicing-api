@@ -1,10 +1,12 @@
+// PACKAGE IMPORT
 const express = require("express");
-const Router = express.Router();
-
+// FILEPATH IMPORT
 const mainRouter = require("./main");
 const productRouter = require("./products");
-
-Router.use("/", mainRouter);
-Router.use("/products", productRouter);
-
-module.exports = Router;
+// DEKLARASI
+const indexRouter = express.Router();
+// IMPLEMENTASI
+indexRouter.use("/", mainRouter);
+indexRouter.use("/products", productRouter);
+// EXPORT
+module.exports = indexRouter;
