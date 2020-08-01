@@ -9,6 +9,6 @@ const db = mySQL.createConnection({
 db.connect(errMsg => {
     if (errMsg) throw errMsg;
     console.log("Database connected");
-})
+});
 
 module.exports = db;

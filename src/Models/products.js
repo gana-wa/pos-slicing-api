@@ -1,6 +1,6 @@
-const db = require('../Configs/dbMySql');
+const db = require("../Configs/dbMySql");
 
-const productsModel = {
+const productModel = {
     getAllProducts: () => {
         return new Promise((resolve, rejects) => {
             const queryString = "SELECT tb_product.product_id, tb_product.product_name, tb_category.category_name, tb_product.price FROM tb_product JOIN tb_category ON tb_product.category_id = tb_category.category_id";
@@ -39,7 +39,7 @@ const productsModel = {
                 }
             });
         });
-    }
-};
+    },
+}
 
-module.exports = productsModel;
+module.exports = productModel;

@@ -1,12 +1,11 @@
-const db = require('../Configs/dbMySql');
+const db = require("../Configs/dbMySql");
+const productRouter = require("../Routes/products");
+const productModel = require("../Models/products");
 
-const productsModel = require('../Models/products');
-
-// Controller
-const productsController = {
+const productController = {
     getAllProducts: (_, res) => {
-        productsModel
-            .getAllProducts
+        productModel
+            .getAllProducts()
             .then((data) => {
                 res.json(data)
             })
@@ -15,7 +14,7 @@ const productsController = {
             })
     },
     postNewProduct: (req, res) => {
-        productsModel
+        productModel
             .postNewProduct(req.body)
             .then((data) => {
                 res.json(data);
@@ -26,7 +25,7 @@ const productsController = {
             })
     },
     getProductById: (req, res) => {
-        productsModel
+        productModel
             .getProductById(req.params.id)
             .then((data) => {
                 res.status(200).json(data);
@@ -35,6 +34,6 @@ const productsController = {
                 res.status(500).json(err);
             })
     }
-};
+}
 
-module.exports = productsController;
+module.exports = productController;
