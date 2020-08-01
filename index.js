@@ -51,7 +51,7 @@ app.use(Router);
 // })
 const queryPromiseGet = () => {
     return new Promise((resolve, rejects) => {
-        const queryString = "SELECT tb_product.product_id, tb_product.product_name, tb_category.category_name, tb_product.price FROM tb_product JOIN tb_category WHERE tb_product.category_id = tb_category.category_id";
+        const queryString = "SELECT tb_product.product_id, tb_product.product_name, tb_category.category_name, tb_product.price FROM tb_product JOIN tb_category ON tb_product.category_id = tb_category.category_id";
         db.query(queryString, (err, data) => {
             if (!err) {
                 resolve(data);
@@ -94,5 +94,28 @@ Router.post("/products", (req, res) => {
         .catch((err) => {
             res.json(err);
             // res.status(500).json(err);
+        })
+})
+
+// ROUTER & QUERY
+const queryPromiseGetById = (id) => {
+    return new Promise((resolve, rejects) => {
+        const queryString = "SELECT tb_product.product_id, tb_product.product_name, tb_category.category_name, tb_product.price FROM tb_product JOIN tb_category ON tb_product.category_id = tb_category.category_id WHERE tb_product.product_id = ?";
+        db.query(queryString, [id], (err, data) => {
+            if (!err) {
+                resolve(data);
+            } else {
+                rejects(err);
+            }
+        });
+    });
+};
+Router.get("/products/:id", (req, res) => {
+    queryPromiseGetById(req.params.id)
+        .then((data) => {
+            res.status(200).json(data);
+        })
+        .catch((err) => {
+            res.status(500).json(err);
         })
 })
