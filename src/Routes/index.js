@@ -2,7 +2,7 @@
 const express = require('express');
 // FILEPATH IMPORT
 const mainRouter = require('./main');
-const productsRouter = require('./products');
+const productsRouter = require('./products')
 // DEKLARASI
 const indexRouter = express.Router();
 // IMPLEMENTASI
