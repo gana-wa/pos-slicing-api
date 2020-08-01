@@ -1,15 +1,13 @@
-const express = require('express');
+const express = require("express");
 
-const productsController = require('../Controllers/produtcs');
+const productRouter = express.Router();
 
-const productsRouter = express.Router;
+const productController = require("../Controllers/products");
 
-// localhost:7000/products
-productsRouter.get("/", productsController.getAllProducts);
-// localhost:7000/products
-productsRouter.post("/", productsController.postNewProduct);
+productRouter.get("/", productController.getAllProducts);
+productRouter.post("/", productController.postNewProduct)
 
 // ROUTER & QUERY
-productsRouter.get("/:id", productsController.getProductById);
+productRouter.get("/:id", productController.getProductById);
 
-module.exports = productsRouter;
+module.exports = productRouter;
