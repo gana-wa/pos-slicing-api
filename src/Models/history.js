@@ -4,7 +4,7 @@ const querySelect = `SELECT tb_history.invoice, tb_history.cashier, tb_history.d
 
 const historyModel = {
     // GET
-    showAllHistory: (body) => {
+    showAllHistory: () => {
         return new Promise((resolve, reject) => {
             db.query(querySelect, (err, data) => {
                 if (!err) {
