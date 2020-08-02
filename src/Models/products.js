@@ -96,7 +96,7 @@ const productModel = {
         });
     },
     // DELETE
-    deleteProduct: () => {
+    deleteProduct: (body) => {
         const { product_name } = body;
         const queryUpdate = `DELETE FROM tb_product WHERE tb_product.product_name = '${product_name}'`;
         return new Promise((resolve, rejects) => {

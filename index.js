@@ -1,15 +1,18 @@
+require("dotenv").config();
+
 const express = require("express");
 const bodyParser = require("body-parser");
-const path = require("path");
+// const path = require("path");
 const logger = require("morgan");
 
 const indexRouter = require("./src/Routes/index");
 
 const app = express();
 
-const port = 7000;
-app.listen(port, () => {
-    console.log(`Server is running at port ${port}`);
+// const port = 7000;
+
+app.listen(process.env.PORT, () => {
+    console.log(`Server is running at port ${process.env.PORT}`);
 });
 app.use(bodyParser.json()); //json
 app.use(bodyParser.urlencoded({ extended: false })) //x-www-form-urlencoded

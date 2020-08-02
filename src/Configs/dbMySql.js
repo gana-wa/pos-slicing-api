@@ -1,10 +1,10 @@
 const mySQL = require("mysql");
 
 const db = mySQL.createConnection({
-    host: "localhost",
+    host: process.env.HOST,
     user: "root",
     password: "",
-    database: "week4_api"
+    database: process.env.DATABASE
 });
 db.connect(errMsg => {
     if (errMsg) throw errMsg;
