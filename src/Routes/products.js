@@ -18,6 +18,7 @@ productRouter.patch("/update", productController.updateProduct); //cuma bisa upd
 // delete product
 productRouter.delete("/delete", productController.deleteProduct); //delete by name
 // search product by
+// productRouter.get("/search/name", productController.getProductByName);
 productRouter.get("/search/name/:name", productController.getProductByName);
 productRouter.get("/search/category/:name", productController.getProductByCategory);
 

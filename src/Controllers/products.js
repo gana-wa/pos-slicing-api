@@ -60,7 +60,7 @@ const productController = {
         productModel
             .postNewProduct(req.body)
             .then((data) => {
-                res.status(200).json(data);;
+                res.status(200).json(data);
             })
             .catch((err) => {
                 res.status(500).json(err);
@@ -91,6 +91,7 @@ const productController = {
     // SEARCH
     getProductByName: (req, res) => {
         productModel
+        // .getProductByName(req.query.product_name)
             .getProductByName(req.params.name)
             .then((data) => {
                 res.status(200).json(data);
