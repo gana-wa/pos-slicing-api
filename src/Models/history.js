@@ -1,5 +1,4 @@
 const db = require("../Configs/dbMySql");
-const e = require("express");
 
 const querySelect = `SELECT tb_history.invoice, tb_history.cashier, tb_history.date, tb_product.product_name, tb_history.total FROM tb_history JOIN tb_transaction ON tb_history.invoice = tb_transaction.invoice JOIN tb_product ON tb_transaction.product_id = tb_product.product_id`
 

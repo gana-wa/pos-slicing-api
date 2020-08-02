@@ -1,5 +1,3 @@
-const mainRouter = require("../Routes/main");
-
 const mainController = {
     sayHello: (_, res) => {
         res.json({

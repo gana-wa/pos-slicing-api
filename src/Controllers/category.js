@@ -1,5 +1,4 @@
 const categoryModel = require("../Models/category");
-const categoryRouter = require("../Routes/category");
 
 const categoryController = {
     // GET

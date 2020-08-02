@@ -1,5 +1,3 @@
-const db = require("../Configs/dbMySql");
-const productRouter = require("../Routes/products");
 const productModel = require("../Models/products");
 
 const productController = {

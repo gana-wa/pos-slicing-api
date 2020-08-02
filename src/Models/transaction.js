@@ -1,6 +1,4 @@
 const db = require("../Configs/dbMySql");
-// moment.js
-const moment = require("moment");
 
 const transactionModel = {
     // POST

@@ -1,6 +1,4 @@
-const db = require("../Configs/dbMySql");
 const transactionModel = require("../Models/transaction");
-const transactionRouter = require("../Routes/transaction");
 
 const transactionController = {
     // POST
