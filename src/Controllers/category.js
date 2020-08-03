@@ -1,4 +1,5 @@
 const categoryModel = require("../Models/category");
+const formRespone = require("../Helpers/Forms/formRespone");
 
 const categoryController = {
     // GET
@@ -6,10 +7,12 @@ const categoryController = {
         categoryModel
             .getAllCategory()
             .then((data) => {
-                res.status(200).json(data);
+                // res.status(200).json(data);
+                formRespone.success(res,data);
             })
             .catch((err) => {
-                res.status(500).json(err);
+                // res.status(500).json(err);
+                formRespone.error(res, err);
             })
     },
     // POST
@@ -17,10 +20,12 @@ const categoryController = {
         categoryModel
             .postCategory(req.body)
             .then((data) => {
-                res.status(200).json(data);
+                // res.status(200).json(data);
+                formRespone.success(res,data);
             })
             .catch((err) => {
-                res.status(500).json(err);
+                // res.status(500).json(err);
+                formRespone.error(res, err);
             })
     },
     // UPDATE
@@ -28,10 +33,12 @@ const categoryController = {
         categoryModel
         .updateCategory(req.body)
         .then((data) => {
-            res.status(200).json(data);
+            // res.status(200).json(data);
+            formRespone.success(res,data);
         })
         .catch((err) => {
-            res.status(500).json(err);
+            // res.status(500).json(err);
+            formRespone.error(res, err);
         })
     },
     // DELETE
@@ -39,10 +46,12 @@ const categoryController = {
         categoryModel
         .deleteCategory(req.body)
         .then((data) => {
-            res.status(200).json(data);
+            // res.status(200).json(data);
+            formRespone.success(res,data);
         })
         .catch((err) => {
-            res.status(500).json(err);
+            // res.status(500).json(err);
+            formRespone.error(res, err);
         })
     }
 }

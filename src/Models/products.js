@@ -83,10 +83,10 @@ const productModel = {
     },
     // UPDATE
     updateProduct: (body) => {
-        const { product_name, price, category_id } = body;
-        const queryUpdate = `UPDATE tb_product SET product_name = ?, price = ?, category_id = ? WHERE tb_product.product_name = '${product_name}'`;
+        const { product_name, price, category_id, product_id } = body;
+        const queryUpdate = `UPDATE tb_product SET product_name = ?, price = ?, category_id = ? WHERE tb_product.product_id = '${product_id}'`;
         return new Promise((resolve, rejects) => {
-            db.query(queryUpdate, [product_name, price, category_id], (err, data) => {
+            db.query(queryUpdate, [product_name, price, category_id, product_id], (err, data) => {
                 if (!err) {
                     resolve(data);
                 } else {
@@ -97,10 +97,10 @@ const productModel = {
     },
     // DELETE
     deleteProduct: (body) => {
-        const { product_name } = body;
-        const queryUpdate = `DELETE FROM tb_product WHERE tb_product.product_name = '${product_name}'`;
+        const { product_id } = body;
+        const queryUpdate = `DELETE FROM tb_product WHERE tb_product.product_id = '${product_id}'`;
         return new Promise((resolve, rejects) => {
-            db.query(queryUpdate, [product_name], (err, data) => {
+            db.query(queryUpdate, [product_id], (err, data) => {
                 if (!err) {
                     resolve(data);
                 } else {
