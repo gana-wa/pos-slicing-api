@@ -1,6 +1,6 @@
 const db = require("../Configs/dbMySql");
 
-const querySelect = `SELECT tb_product.product_id, tb_product.product_name, tb_category.category_name, tb_product.price FROM tb_product JOIN tb_category ON tb_product.category_id = tb_category.category_id`;
+const querySelect = `SELECT tb_product.product_id, tb_product.product_name, tb_category.category_name, tb_product.price, tb_product.image FROM tb_product JOIN tb_category ON tb_product.category_id = tb_category.category_id`;
 
 const productModel = {
     // GET or SELECT
