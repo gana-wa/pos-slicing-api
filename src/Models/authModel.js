@@ -10,7 +10,8 @@ const authModel = {
             //hasilnya kosong (data.length === 0) lakukan proses registrasi
 
             // registration
-            bcrypt.genSalt(10, (err, salt) => {
+            const saltRounds = 10;
+            bcrypt.genSalt(saltRounds, (err, salt) => {
                 if (err) {
                     reject(err);
                 }
@@ -32,7 +33,18 @@ const authModel = {
             })
         })
     }, //end registration
-
+    loginUser: (body) => {
+        return new Promise((resolve, reject) => {
+            const queryString = "SELECT username, password FROM tb_user WHERE username=?";
+            db.query(queryString, body.username, (err, data) => {
+                if (!err) {
+                    resolve(data);
+                } else {
+                    reject(err);
+                }
+            })
+        })
+    },
 }
 
 module.exports = authModel;

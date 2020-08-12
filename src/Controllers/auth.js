@@ -12,7 +12,16 @@ const authController = {
                 formRespone.error(res, err);
             })
     },
-
+    login: (req, res) => {
+        authModel
+            .loginUser(req.body)
+            .then((data) => {
+                formRespone.success(res, data)
+            })
+            .catch((err) => {
+                formRespone.error(res, err)
+            })
+    }
 }
 
 module.exports = authController;
