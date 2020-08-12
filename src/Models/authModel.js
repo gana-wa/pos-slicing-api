@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-// const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 const db = require('../Configs/dbMySql');
 
 const authModel = {
@@ -37,10 +37,28 @@ const authModel = {
         return new Promise((resolve, reject) => {
             const queryString = "SELECT username, password FROM tb_user WHERE username=?";
             db.query(queryString, body.username, (err, data) => {
-                if (!err) {
-                    resolve(data);
-                } else {
+                // check error query
+                if (err) {
                     reject(err);
+                }
+                // check data
+                if (data.length) {
+                    // check password
+                    bcrypt.compare(body.password, data[0].password, (err, result) => {
+                        if (result) {
+                            const token = jwt.sign(body, process.env.SECRET_KEY);
+                            const msg = "Login success..!"
+                            resolve({ msg, token })
+                        }
+                        if (!result) {
+                            reject({ msg: "Wrong password..!" })
+                        }
+                        if (err) {
+                            reject(err);
+                        }
+                    })
+                } else {
+                    reject("Username not found..!")
                 }
             })
         })
