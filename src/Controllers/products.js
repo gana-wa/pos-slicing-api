@@ -7,12 +7,24 @@ const productController = {
         productModel
             .getAllProducts()
             .then((data) => {
-                formRespone.success(res,data);
+                formRespone.success(res, data);
                 // res.status(200).json(data);
             })
             .catch((err) => {
                 formRespone.error(res, err);
                 // res.status(500).json(err)
+            })
+    },
+    // GET PAGINATED
+    getPaginatedProducts: (req, res) => {
+        const { page, limit } = req.query;
+        productModel
+            .getPaginatedProducts(page, limit)
+            .then((data) => {
+                formRespone.pagination(req, res, data);
+            })
+            .catch((err) => {
+                formRespone.error(res, err);
             })
     },
     // GET SORTING
@@ -21,7 +33,7 @@ const productController = {
             .getAllProductsSortByName()
             .then((data) => {
                 // res.status(200).json(data);
-                formRespone.success(res,data);
+                formRespone.success(res, data);
             })
             .catch((err) => {
                 // res.status(500).json(err)
@@ -33,7 +45,7 @@ const productController = {
             .getAllProductsSortByCategory()
             .then((data) => {
                 // res.status(200).json(data);
-                formRespone.success(res,data);
+                formRespone.success(res, data);
             })
             .catch((err) => {
                 // res.status(500).json(err)
@@ -45,7 +57,7 @@ const productController = {
             .getAllProductsSortByNewest()
             .then((data) => {
                 // res.status(200).json(data);
-                formRespone.success(res,data);
+                formRespone.success(res, data);
             })
             .catch((err) => {
                 // res.status(500).json(err)
@@ -57,7 +69,7 @@ const productController = {
             .getAllProductsSortByPrice()
             .then((data) => {
                 // res.status(200).json(data);
-                formRespone.success(res,data);
+                formRespone.success(res, data);
             })
             .catch((err) => {
                 // res.status(500).json(err)
@@ -70,7 +82,7 @@ const productController = {
             .postNewProduct(req.body)
             .then((data) => {
                 // res.status(200).json(data);
-                formRespone.success(res,data);
+                formRespone.success(res, data);
             })
             .catch((err) => {
                 // res.status(500).json(err);
@@ -83,7 +95,7 @@ const productController = {
             .updateProduct(req.body)
             .then((data) => {
                 // res.status(200).json(data);
-                formRespone.success(res,data);
+                formRespone.success(res, data);
             })
             .catch((err) => {
                 // res.status(500).json(err);
@@ -96,7 +108,7 @@ const productController = {
             .deleteProduct(req.body)
             .then((data) => {
                 // res.status(200).json(data);
-                formRespone.success(res,data);
+                formRespone.success(res, data);
             })
             .catch((err) => {
                 // res.status(500).json(err);
@@ -106,11 +118,11 @@ const productController = {
     // SEARCH
     getProductByName: (req, res) => {
         productModel
-        // .getProductByName(req.query.product_name)
+            // .getProductByName(req.query.product_name)
             .getProductByName(req.params.name)
             .then((data) => {
                 // res.status(200).json(data);
-                formRespone.success(res,data);
+                formRespone.success(res, data);
             })
             .catch((err) => {
                 // res.status(500).json(err);
@@ -122,7 +134,7 @@ const productController = {
             .getProductByCategory(req.params.name)
             .then((data) => {
                 // res.status(200).json(data);
-                formRespone.success(res,data);
+                formRespone.success(res, data);
             })
             .catch((err) => {
                 // res.status(500).json(err);

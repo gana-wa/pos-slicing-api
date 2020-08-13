@@ -6,6 +6,8 @@ const productController = require("../Controllers/products");
 
 // get all product
 productRouter.get("/", productController.getAllProducts);
+// get whit pagination
+productRouter.get("/pagination", productController.getPaginatedProducts);
 // insert product
 productRouter.post("/", productController.postNewProduct); //localhost:7000/products    
 // get with sorting

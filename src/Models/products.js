@@ -16,6 +16,19 @@ const productModel = {
             });
         });
     },
+    getPaginatedProducts: (page, limit) => {
+        return new Promise((resolve, rejects) => {
+            const offset = (page - 1) * limit;
+            const queryString = `${querySelect} LIMIT ? OFFSET ?`;
+            db.query(queryString, [Number(limit), offset], (err, data) => {
+                if (!err) {
+                    resolve(data);
+                } else {
+                    rejects(err);
+                }
+            });
+        });
+    },
     // GET or SELECT with SORTING
     getAllProductsSortByName: () => {
         return new Promise((resolve, rejects) => {
