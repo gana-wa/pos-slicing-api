@@ -35,7 +35,7 @@ const authModel = {
     }, //end registration
     loginUser: (body) => {
         return new Promise((resolve, reject) => {
-            const queryString = "SELECT username, password FROM tb_user WHERE username=?";
+            const queryString = "SELECT username, password, level_id FROM tb_user WHERE username=?";
             db.query(queryString, body.username, (err, data) => {
                 // check error query
                 if (err) {
@@ -46,7 +46,13 @@ const authModel = {
                     // check password
                     bcrypt.compare(body.password, data[0].password, (err, result) => {
                         if (result) {
-                            const token = jwt.sign(body, process.env.SECRET_KEY);
+                            const { username } = body;
+                            const { level_id } = data[0];
+                            const payload = {
+                                username,
+                                level_id,
+                            }
+                            const token = jwt.sign(payload, process.env.SECRET_KEY);
                             const msg = "Login success..!"
                             resolve({ msg, token })
                         }

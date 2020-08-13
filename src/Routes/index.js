@@ -7,14 +7,19 @@ const categoryRouter = require("./category");
 const transactionRouter = require("./transaction");
 const historyRouter = require("./history");
 const authRouter = require('./auth');
+const checkToken = require('../Helpers/Middleware/checkToken');
 // DEKLARASI
 const indexRouter = express.Router();
 // IMPLEMENTASI
+// PUBLIC ROUTE
 indexRouter.use("/", mainRouter);
 indexRouter.use("/products", productRouter);
-indexRouter.use("/category", categoryRouter);
 indexRouter.use("/transaction", transactionRouter);
 indexRouter.use("/history", historyRouter);
 indexRouter.use("/auth", authRouter);
+// PRIVATE ROUTE
+indexRouter.use("/category", checkToken, categoryRouter);
+
+
 // EXPORT
 module.exports = indexRouter;
