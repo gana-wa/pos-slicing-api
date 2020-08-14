@@ -8,8 +8,8 @@ const checkToken = (req, res, next) => {
             msg: "Please login first..!",
         })
     }
-    const token = bearerToken.split(" ")[1];
     try {
+        const token = bearerToken.split(" ")[1];
         const decoded = jwt.verify(token, process.env.SECRET_KEY);
         req.decodedToken = decoded;
         next();

@@ -52,7 +52,9 @@ const authModel = {
                                 username,
                                 level_id,
                             }
-                            const token = jwt.sign(payload, process.env.SECRET_KEY);
+                            const token = jwt.sign(payload, process.env.SECRET_KEY
+                                // , { expiresIn: "6h" }
+                            );
                             const msg = "Login success..!"
                             resolve({ msg, token })
                         }
