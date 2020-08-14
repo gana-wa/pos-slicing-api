@@ -80,11 +80,11 @@ const productModel = {
     },
     // POST or INSERT
     postNewProduct: (body) => {
-        const { product_name, price, category_id } = body;
-        const queryString = `INSERT INTO tb_product SET product_name="${product_name}", price=${price}, category_id=${category_id}`
+        const { product_name, price, category_id, image } = body;
+        const queryString = "INSERT INTO tb_product SET product_name=?, price=?, category_id=?, image=?"
         // const queryString = "INSERT INTO tb_product SET ?";
         return new Promise((resolve, rejects) => {
-            db.query(queryString, [product_name, price, category_id], (err, data) => {
+            db.query(queryString, [product_name, price, category_id, image], (err, data) => {
                 // db.query(queryString, (err, data) => {
                 if (!err) {
                     resolve(data);

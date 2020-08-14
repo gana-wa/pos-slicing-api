@@ -3,13 +3,14 @@ const express = require("express");
 const productRouter = express.Router();
 
 const productController = require("../Controllers/products");
+const uploadFile = require('../Helpers/Middleware/uploadFile');
 
 // get all product
 productRouter.get("/", productController.getAllProducts);
 // get whit pagination
 productRouter.get("/pagination", productController.getPaginatedProducts);
 // insert product
-productRouter.post("/", productController.postNewProduct); //localhost:7000/products    
+productRouter.post("/", uploadFile.singleUpload, productController.postNewProduct); //localhost:7000/products    
 // get with sorting
 productRouter.get("/sort/byname", productController.getAllProductsSortByName);
 productRouter.get("/sort/bycategory", productController.getAllProductsSortByCategory);
