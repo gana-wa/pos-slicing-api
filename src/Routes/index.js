@@ -7,7 +7,6 @@ const categoryRouter = require("./category");
 const transactionRouter = require("./transaction");
 const historyRouter = require("./history");
 const authRouter = require('./auth');
-const checkToken = require('../Helpers/Middleware/checkToken');
 const uploadRouter = require('./upload');
 
 // DEKLARASI
@@ -21,7 +20,7 @@ indexRouter.use("/history", historyRouter);
 indexRouter.use("/auth", authRouter);
 indexRouter.use("/upload", uploadRouter);
 // PRIVATE ROUTE
-indexRouter.use("/category", checkToken, categoryRouter);
+indexRouter.use("/category", categoryRouter);
 
 
 // EXPORT

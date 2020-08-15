@@ -32,7 +32,7 @@ const categoryModel = {
     // UPDATE
     updateCategory: (body) => {
         const { category_name, category_id } = body;
-        const queryUpdate = `UPDATE tb_category SET category_name = ? WHERE category_id = ${category_id}`;
+        const queryUpdate = `UPDATE tb_category SET category_name = ? WHERE category_id = ?`;
         return new Promise((resolve, rejects) => {
             db.query(queryUpdate, [category_name, category_id], (err, data) => {
                 if (!err) {
@@ -45,11 +45,11 @@ const categoryModel = {
     },
     // DELETE
     deleteCategory: (body) => {
-        const {category_id} = body;
+        const { category_id } = body;
         const queryString = `DELETE FROM tb_category WHERE category_id = ${category_id}`
-        return new Promise((resolve,reject) => {
-            db.query(queryString, [category_id], (err,data) => {
-                if(!err) {
+        return new Promise((resolve, reject) => {
+            db.query(queryString, [category_id], (err, data) => {
+                if (!err) {
                     resolve(data);
                 } else {
                     reject(err);

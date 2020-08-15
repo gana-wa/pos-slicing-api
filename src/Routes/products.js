@@ -10,7 +10,7 @@ productRouter.get("/", productController.getAllProducts);
 // get whit pagination
 productRouter.get("/pagination", productController.getPaginatedProducts);
 // insert product
-productRouter.post("/", uploadFile.singleUpload, productController.postNewProduct); //localhost:7000/products    
+productRouter.post("/", uploadFile.singleUpload, productController.postNewProduct);
 // get with sorting
 productRouter.get("/sort/byname", productController.getAllProductsSortByName);
 productRouter.get("/sort/bycategory", productController.getAllProductsSortByCategory);

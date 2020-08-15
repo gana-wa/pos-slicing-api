@@ -8,7 +8,7 @@ const categoryController = {
             .getAllCategory()
             .then((data) => {
                 // res.status(200).json(data);
-                formRespone.success(res,data);
+                formRespone.success(res, data);
             })
             .catch((err) => {
                 // res.status(500).json(err);
@@ -20,8 +20,11 @@ const categoryController = {
         categoryModel
             .postCategory(req.body)
             .then((data) => {
-                // res.status(200).json(data);
-                formRespone.success(res,data);
+                const responseObj = {
+                    category_id: data.insertID,
+                    ...req.body
+                }
+                formRespone.success(res, responseObj, data);
             })
             .catch((err) => {
                 // res.status(500).json(err);
@@ -31,28 +34,32 @@ const categoryController = {
     // UPDATE
     updateCategory: (req, res) => {
         categoryModel
-        .updateCategory(req.body)
-        .then((data) => {
-            // res.status(200).json(data);
-            formRespone.success(res,data);
-        })
-        .catch((err) => {
-            // res.status(500).json(err);
-            formRespone.error(res, err);
-        })
+            .updateCategory(req.body)
+            .then((data) => {
+                const responseObj = {
+                    status: "Successfully updated",
+                    category_id: data.insertId,
+                    ...req.body
+                }
+                formRespone.success(res, responseObj);
+            })
+            .catch((err) => {
+                // res.status(500).json(err);
+                formRespone.error(res, err);
+            })
     },
     // DELETE
-    deleteCategory: (req,res) => {
+    deleteCategory: (req, res) => {
         categoryModel
-        .deleteCategory(req.body)
-        .then((data) => {
-            // res.status(200).json(data);
-            formRespone.success(res,data);
-        })
-        .catch((err) => {
-            // res.status(500).json(err);
-            formRespone.error(res, err);
-        })
+            .deleteCategory(req.body)
+            .then((data) => {
+                // res.status(200).json(data);
+                formRespone.success(res, data);
+            })
+            .catch((err) => {
+                // res.status(500).json(err);
+                formRespone.error(res, err);
+            })
     }
 }
 
