@@ -12,6 +12,6 @@ categoryRouter.post("/", checkToken.checkAdmin, categoryController.postCategory)
 // UPDATE
 categoryRouter.patch("/", checkToken.checkAdmin, categoryController.updateCategory);
 // DELETE
-categoryRouter.delete("/", checkToken.checkAdmin, categoryController.deleteCategory);
+categoryRouter.delete("/:category_id", checkToken.checkAdmin, categoryController.deleteCategory);
 
 module.exports = categoryRouter;

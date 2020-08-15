@@ -7,22 +7,17 @@ const uploadFile = require('../Helpers/Middleware/uploadFile');
 
 // get all product
 productRouter.get("/", productController.getAllProducts);
-// get whit pagination
+// get with pagination
 productRouter.get("/pagination", productController.getPaginatedProducts);
 // insert product
 productRouter.post("/", uploadFile.singleUpload, productController.postNewProduct);
 // get with sorting
-productRouter.get("/sort/byname", productController.getAllProductsSortByName);
-productRouter.get("/sort/bycategory", productController.getAllProductsSortByCategory);
-productRouter.get("/sort/bynewest", productController.getAllProductsSortByNewest);
-productRouter.get("/sort/byprice", productController.getAllProductsSortByPrice);
+productRouter.get("/sort", productController.sortProducts);
 // update product
-productRouter.patch("/update", productController.updateProduct); //cuma bisa update harga
+productRouter.patch("/:product_id", productController.updateProduct);
 // delete product
-productRouter.delete("/delete", productController.deleteProduct); //delete by name
+productRouter.delete("/:product_id", productController.deleteProduct);
 // search product by
-// productRouter.get("/search/name", productController.getProductByName);
-productRouter.get("/search/name/:name", productController.getProductByName);
-productRouter.get("/search/category/:name", productController.getProductByCategory);
+productRouter.get("/search", productController.searchProductByName);
 
 module.exports = productRouter;

@@ -30,9 +30,12 @@ const productModel = {
         });
     },
     // GET or SELECT with SORTING
-    getAllProductsSortByName: () => {
+    sortProducts: (query) => {
+        const sortBy = query.by;
+        const sortOrder = query.order;
         return new Promise((resolve, rejects) => {
-            const queryString = `${querySelect} ORDER BY tb_product.product_name ASC`;
+            // const queryString = `${querySelect} ORDER BY tb_product.product_name ASC`;
+            const queryString = `${querySelect} ORDER BY tb_product.${sortBy} ${sortOrder}`;
             db.query(queryString, (err, data) => {
                 if (!err) {
                     resolve(data);
@@ -42,33 +45,10 @@ const productModel = {
             });
         });
     },
-    getAllProductsSortByCategory: () => {
+    // SEARCH
+    searchProductByName: (product_name) => {
         return new Promise((resolve, rejects) => {
-            const queryString = `${querySelect} ORDER BY tb_category.category_id ASC`;
-            db.query(queryString, (err, data) => {
-                if (!err) {
-                    resolve(data);
-                } else {
-                    rejects(err);
-                }
-            });
-        });
-    },
-    getAllProductsSortByNewest: () => {
-        return new Promise((resolve, rejects) => {
-            const queryString = `${querySelect} ORDER BY tb_product.product_id DESC`;
-            db.query(queryString, (err, data) => {
-                if (!err) {
-                    resolve(data);
-                } else {
-                    rejects(err);
-                }
-            });
-        });
-    },
-    getAllProductsSortByPrice: () => {
-        return new Promise((resolve, rejects) => {
-            const queryString = `${querySelect} ORDER BY tb_product.price ASC`;
+            const queryString = `${querySelect} WHERE tb_product.product_name LIKE '%${product_name}%'`;
             db.query(queryString, (err, data) => {
                 if (!err) {
                     resolve(data);
@@ -95,11 +75,12 @@ const productModel = {
         });
     },
     // UPDATE
-    updateProduct: (body) => {
-        const { product_name, price, category_id, product_id } = body;
-        const queryUpdate = `UPDATE tb_product SET product_name = ?, price = ?, category_id = ? WHERE tb_product.product_id = '${product_id}'`;
+    updateProduct: (product_id, body) => {
+        // const { product_name, price, category_id, product_id } = body;
+        // const queryUpdate = `UPDATE tb_product SET product_name = ?, price = ?, category_id = ? WHERE tb_product.product_id = '${product_id}'`;
+        const queryUpdate = `UPDATE tb_product SET ? WHERE tb_product.product_id = '${product_id}'`;
         return new Promise((resolve, rejects) => {
-            db.query(queryUpdate, [product_name, price, category_id, product_id], (err, data) => {
+            db.query(queryUpdate, [body], (err, data) => {
                 if (!err) {
                     resolve(data);
                 } else {
@@ -109,36 +90,10 @@ const productModel = {
         });
     },
     // DELETE
-    deleteProduct: (body) => {
-        const { product_id } = body;
+    deleteProduct: (product_id) => {
         const queryUpdate = `DELETE FROM tb_product WHERE tb_product.product_id = '${product_id}'`;
         return new Promise((resolve, rejects) => {
             db.query(queryUpdate, [product_id], (err, data) => {
-                if (!err) {
-                    resolve(data);
-                } else {
-                    rejects(err);
-                }
-            });
-        });
-    },
-    // SEARCH
-    getProductByName: (name) => {
-        return new Promise((resolve, rejects) => {
-            const queryString = `${querySelect} WHERE tb_product.product_name LIKE '%${name}%'`;
-            db.query(queryString, (err, data) => {
-                if (!err) {
-                    resolve(data);
-                } else {
-                    rejects(err);
-                }
-            });
-        });
-    },
-    getProductByCategory: (name) => {
-        return new Promise((resolve, rejects) => {
-            const queryString = `${querySelect} WHERE tb_category.category_name LIKE '%${name}%'`;
-            db.query(queryString, (err, data) => {
                 if (!err) {
                     resolve(data);
                 } else {

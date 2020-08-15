@@ -44,11 +44,11 @@ const categoryModel = {
         });
     },
     // DELETE
-    deleteCategory: (body) => {
-        const { category_id } = body;
+    deleteCategory: (category_id) => {
+        // const { category_id } = body;
         const queryString = `DELETE FROM tb_category WHERE category_id = ${category_id}`
         return new Promise((resolve, reject) => {
-            db.query(queryString, [category_id], (err, data) => {
+            db.query(queryString, (err, data) => {
                 if (!err) {
                     resolve(data);
                 } else {

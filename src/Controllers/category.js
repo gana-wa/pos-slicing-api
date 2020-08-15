@@ -7,11 +7,9 @@ const categoryController = {
         categoryModel
             .getAllCategory()
             .then((data) => {
-                // res.status(200).json(data);
                 formRespone.success(res, data);
             })
             .catch((err) => {
-                // res.status(500).json(err);
                 formRespone.error(res, err);
             })
     },
@@ -21,13 +19,12 @@ const categoryController = {
             .postCategory(req.body)
             .then((data) => {
                 const responseObj = {
-                    category_id: data.insertID,
+                    category_id: data.insertId,
                     ...req.body
                 }
-                formRespone.success(res, responseObj, data);
+                formRespone.success(res, responseObj);
             })
             .catch((err) => {
-                // res.status(500).json(err);
                 formRespone.error(res, err);
             })
     },
@@ -37,27 +34,27 @@ const categoryController = {
             .updateCategory(req.body)
             .then((data) => {
                 const responseObj = {
-                    status: "Successfully updated",
+                    msg: "Successfully updated",
                     category_id: data.insertId,
                     ...req.body
                 }
                 formRespone.success(res, responseObj);
             })
             .catch((err) => {
-                // res.status(500).json(err);
                 formRespone.error(res, err);
             })
     },
     // DELETE
     deleteCategory: (req, res) => {
         categoryModel
-            .deleteCategory(req.body)
+            .deleteCategory(req.params.category_id)
             .then((data) => {
-                // res.status(200).json(data);
-                formRespone.success(res, data);
+                const responseObj = {
+                    msg: `Category with id: ${req.params.category_id} successfully deleted..!`
+                }
+                formRespone.success(res, responseObj);
             })
             .catch((err) => {
-                // res.status(500).json(err);
                 formRespone.error(res, err);
             })
     }
