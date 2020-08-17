@@ -76,11 +76,11 @@ const productModel = {
     },
     // UPDATE
     updateProduct: (product_id, body) => {
-        // const { product_name, price, category_id, product_id } = body;
-        // const queryUpdate = `UPDATE tb_product SET product_name = ?, price = ?, category_id = ? WHERE tb_product.product_id = '${product_id}'`;
-        const queryUpdate = `UPDATE tb_product SET ? WHERE tb_product.product_id = '${product_id}'`;
+        const { product_name, price, category_id, image } = body;
+        const queryUpdate = `UPDATE tb_product SET product_name = ?, price = ?, category_id = ?, image = ? WHERE tb_product.product_id = '${product_id}'`;
+        // const queryUpdate = `UPDATE tb_product SET ? WHERE tb_product.product_id = '${product_id}'`;
         return new Promise((resolve, rejects) => {
-            db.query(queryUpdate, [body], (err, data) => {
+            db.query(queryUpdate, [product_name, price, category_id, image], (err, data) => {
                 if (!err) {
                     resolve(data);
                 } else {

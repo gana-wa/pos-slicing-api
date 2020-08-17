@@ -52,7 +52,12 @@ const productController = {
         productModel
             .postNewProduct(req.body)
             .then((data) => {
-                formRespone.success(res, data);
+                const responseObj = {
+                    msg: "New product successfully added..!",
+                    product_id: data.insertId,
+                    ...req.body
+                }
+                formRespone.success(res, responseObj);
             })
             .catch((err) => {
                 formRespone.error(res, err);
@@ -65,6 +70,7 @@ const productController = {
             .then((data) => {
                 const responseObj = {
                     msg: "Successfully updated..!",
+                    product_id: data.insertId,
                     ...req.body
                 }
                 formRespone.success(res, responseObj);

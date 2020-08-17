@@ -6,7 +6,7 @@ const categoryController = require("../Controllers/category");
 const checkToken = require('../Helpers/Middleware/checkToken');
 
 // GET
-categoryRouter.get("/", categoryController.getAllCategory);
+categoryRouter.get("/", checkToken.checkLogin, categoryController.getAllCategory);
 // POST
 categoryRouter.post("/", checkToken.checkAdmin, categoryController.postCategory);
 // UPDATE
