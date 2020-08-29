@@ -13,20 +13,32 @@ const historyModel = {
                     reject(err);
                 }
             })
-        })
+        });
     },
     showHistoryByInvoice: (invoice) => {
         const queryString = `${querySelect} WHERE tb_history.invoice = ${invoice}`;
         return new Promise((resolve, reject) => {
             db.query(queryString, (err, data) => {
-                if(!err) {
+                if (!err) {
                     resolve(data);
                 } else {
                     reject(err);
                 }
             })
-        })
-    }
+        });
+    },
+    showHistory: () => {
+        const queryString = `SELECT * FROM tb_history`;
+        return new Promise((resolve, reject) => {
+            db.query(queryString, (err, data) => {
+                if (!err) {
+                    resolve(data);
+                } else {
+                    reject(err);
+                }
+            })
+        });
+    },
 }
 
 module.exports = historyModel;

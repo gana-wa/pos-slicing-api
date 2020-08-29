@@ -6,12 +6,12 @@ const categoryController = require("../Controllers/category");
 const checkToken = require('../Helpers/Middleware/checkToken');
 
 // GET
-categoryRouter.get("/", checkToken.checkLogin, categoryController.getAllCategory);
+categoryRouter.get("/", categoryController.getAllCategory);
 // POST
-categoryRouter.post("/", checkToken.checkAdmin, categoryController.postCategory);
+categoryRouter.post("/", categoryController.postCategory);
 // UPDATE
-categoryRouter.patch("/", checkToken.checkAdmin, categoryController.updateCategory);
+categoryRouter.patch("/", categoryController.updateCategory);
 // DELETE
-categoryRouter.delete("/:category_id", checkToken.checkAdmin, categoryController.deleteCategory);
+categoryRouter.delete("/:category_id", categoryController.deleteCategory);
 
 module.exports = categoryRouter;

@@ -19,7 +19,16 @@ const historyController = {
             .catch((err) => {
                 formRespone.error(res, err);
             })
-    }
+    },
+    showHistory: (_, res) => {
+        historyModel.showHistory()
+            .then((data) => {
+                formRespone.success(res, data)
+            })
+            .catch((err) => {
+                formRespone.error(res, err)
+            })
+    },
 }
 
 module.exports = historyController;

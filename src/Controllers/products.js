@@ -39,7 +39,7 @@ const productController = {
     // SEARCH
     searchProductByName: (req, res) => {
         productModel
-            .searchProductByName(req.query.product_name)
+            .searchProductByName(req.query)
             .then((data) => {
                 formRespone.success(res, data);
             })

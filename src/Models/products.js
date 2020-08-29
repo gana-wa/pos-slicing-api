@@ -46,12 +46,15 @@ const productModel = {
         });
     },
     // SEARCH
-    searchProductByName: (product_name) => {
+    searchProductByName: (query) => {
         return new Promise((resolve, rejects) => {
-            const queryString = `${querySelect} WHERE tb_product.product_name LIKE '%${product_name}%'`;
+            const queryString = `${querySelect} WHERE tb_product.product_name LIKE '%${query.product_name}%' ORDER BY tb_product.${query.by}`;
             db.query(queryString, (err, data) => {
                 if (!err) {
-                    resolve(data);
+                    if (data.length !== 0) {
+                        resolve(data);
+                    }
+                    rejects({ msg: "Data not found..!" })
                 } else {
                     rejects(err);
                 }
@@ -77,10 +80,10 @@ const productModel = {
     // UPDATE
     updateProduct: (product_id, body) => {
         const { product_name, price, category_id, image } = body;
-        const queryUpdate = `UPDATE tb_product SET product_name = ?, price = ?, category_id = ?, image = ? WHERE tb_product.product_id = '${product_id}'`;
+        const queryUpdate = `UPDATE tb_product SET ? WHERE tb_product.product_id = '${product_id}'`;
         // const queryUpdate = `UPDATE tb_product SET ? WHERE tb_product.product_id = '${product_id}'`;
         return new Promise((resolve, rejects) => {
-            db.query(queryUpdate, [product_name, price, category_id, image], (err, data) => {
+            db.query(queryUpdate, [body], (err, data) => {
                 if (!err) {
                     resolve(data);
                 } else {
