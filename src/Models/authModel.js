@@ -60,8 +60,8 @@ const authModel = {
                             const token = jwt.sign(payload, process.env.SECRET_KEY
                                 // , { expiresIn: "6h" }
                             );
-                            const msg = "Login success..!"
-                            resolve({ msg, token })
+                            const msg = "Login success..!";
+                            resolve({ msg, username, token })
                         }
                         if (!result) {
                             reject({ msg: "Wrong password..!" })
