@@ -61,7 +61,7 @@ const authModel = {
                                 // , { expiresIn: "6h" }
                             );
                             const msg = "Login success..!";
-                            resolve({ msg, username, token })
+                            resolve({ msg, username, level_id, token })
                         }
                         if (!result) {
                             reject({ msg: "Wrong password..!" })
@@ -71,7 +71,7 @@ const authModel = {
                         }
                     })
                 } else {
-                    reject("Username not found..!")
+                    reject({ msg: "Username not found..!" })
                 }
             })
         })
